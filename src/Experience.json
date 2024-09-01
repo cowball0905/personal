@@ -1,0 +1,45 @@
+
+{
+  "experiences":[
+      {
+        "id": "1",
+        "title": "Information Technology Intern",
+        "company": "MONEY GENERATOR TECHNOLOGY LIMITED",
+        "companydesc": "MGT 的專業技術團隊具有豐富的產品開發經驗。提供包括網頁設計、網上商店、手機應用程式開發、搜尋引擎最佳化等服務。MGT 致力於您的業務和服務為基礎，並在不同領域提供專業級的解決方案。",
+        "type": "intern",
+        "duration": "2024/6-2024/8",
+        "web": "https://hkmgt.com/",
+        "content":"Perform front/backend web development and maintenance,Troubleshooting and resolving technical issues of the system,Attend weekly meetings with web designers and backend developers,Stay up to date with top-notched framework and apply to the company,Complete ad-hoc duties as required."
+      },
+      {
+        "id": "2",
+        "title": "Student Volunteer",
+        "company" : "Hong Kong Open Source Conference 香港開源年會 自由職業",
+        "companydesc": "Hong Kong Open Source Conference ( HKOSCon ) is one of the major Open Source conferences in Hong Kong since its first commercement in 2013, bringing an international crowd of developers, contributors, users, IT manager, students and public. The conference aims to promote the open source development into communities and to encourage its application in the industry.",
+        "type": "volunteer",
+        "duration": "2024/7",
+        "web":"https://hkoscon.org/",
+        "content":"connected all the pieces of an event, ensuring it proceeds logically and smoothly,introduced talent on stage, following the order of events, and communicating with the talent team,understood IT knowledges such as AWS , Google Cloud and Web App- promoted concept of 'Open Source'"
+      },
+      {
+        "id": "3",
+        "title": "Student Mentor",
+        "company" : "City University of Hong Kong",
+        "companydesc": "The City University of Hong Kong (CityU) is a public research university located in Kowloon Tong, Kowloon, Hong Kong. It was founded in 1984 as the City Polytechnic of Hong Kong and became a fully accredited university in 1994.",
+        "type": "volunteer",
+        "duration": "2024/7",
+        "web": "https://www.cityu.edu.hk/",
+        "content":"coordinating with mentors from different background,helping mentees to acquire social and interpersonal skills,participating and organising mentor mentor activities proactively,being accessible and available to students and offering help to them whenever necessary"
+      },
+      {
+        "id": "4",
+        "title": "Personal Website",
+        "company" : "",
+        "companydesc": "",
+        "type": "project",
+        "duration": "2024/8",
+        "web":"",
+        "content":"creating a simple personal website with Vuejs and use some GSAP for animation which is from the Javascript Library"
+      }
+    ]
+  }
