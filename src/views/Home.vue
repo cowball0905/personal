@@ -8,7 +8,7 @@
 
 <template>
   <hero/>
-  <Explist limit="3" :showButton="true"/>
+  <Explist :limit="3" :showButton="true"/>
 </template>
 
 <style scoped>

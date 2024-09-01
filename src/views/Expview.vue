@@ -1,35 +1,40 @@
 <script setup>
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-    import {reactive,onMounted} from 'vue';
-    import {RouterLink,useRoute} from 'vue-router'
-    import axios from 'axios';
+    import {onMounted} from 'vue';
     import BackButton from '@/components/BackButton.vue';
+    import { ref } from 'vue';
+    import { db } from '../firebase';
+    import { ref as dbRef, get, child,} from 'firebase/database';
 
-    const route = useRoute();
 
-    const state = reactive({
-        experiences: {},
-        isLoading:true,
-    })
+    const isLoading = ref(true);
+    const experiences = ref(null);
 
-    const experienceid = route.params.id;
-
-    onMounted(async () => {
-        try{
-            const response = await axios.get(`/api/experiences/${experienceid}`)
-            state.experiences = response.data;
-
-        }catch(error){
-            console.error('Error fetching experience',error)
-        }finally{
-            state.isLoading = false;
+    const fetchExperience = async () => {
+        const dbReference = dbRef(db);
+        try {
+            console.log("Fetching data...");
+            const snapshot = await get(child(dbReference, 'experiences'));
+            console.log("Snapshot received:", snapshot);
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                experiences.value = Array.isArray(data) ? data[0] : data;
+                console.log("Data loaded:", experiences.value);
+            } else {
+                console.log("No data available");
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            isLoading.value = false;
         }
-    })
-    
+    };
+
+    onMounted(fetchExperience);
 </script>
 
 <template>
-        <div v-if="state.isLoading" class="loading">
+        <div v-if="isLoading" class="loading">
             <BackButton/>
             <PulseLoader/>
         </div>
@@ -37,24 +42,24 @@
         <div v-else class="exp-area">
             <BackButton/>
             <div class="exp-basic">
-                <p class="type">{{state.experiences.type}}</p>
-                <p class="title">{{state.experiences.title}}</p>
-                <p class="company" v-if="state.experiences.company">{{state.experiences.company}}</p>
+                <p class="type">{{experiences.type}}</p>
+                <p class="title">{{experiences.title}}</p>
+                <p class="company" v-if="experiences.company">{{experiences.company}}</p>
                 <p v-else>-</p>
             </div>
             <div class="exp-adv">
                 <div class="exp-desc">
                     <h1>Description</h1>
-                    <p class="content">{{state.experiences.content}}</p>
+                    <p class="content">{{experiences.content}}</p>
                     <h1>Duration</h1>
-                    <p>{{state.experiences.duration}}</p>
+                    <p>{{experiences.duration}}</p>
                 </div>
                 <div class="exp-org">
                     <h1>Company/Organization Info</h1>
-                    <p v-if="state.experiences.companydesc" class="desc">{{state.experiences.companydesc}}</p>
+                    <p v-if="experiences.companydesc" class="desc">{{experiences.companydesc}}</p>
                     <p v-else class="desc">-</p>
                     <h1>Company/Organization Website</h1>
-                    <a :href="state.experiences.web" v-if="state.experiences.web">{{state.experiences.web}}</a>
+                    <a :href="experiences.web" v-if="experiences.web">{{experiences.web}}</a>
                     <p v-else>-</p>
                 </div>
             </div>

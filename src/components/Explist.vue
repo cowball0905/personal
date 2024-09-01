@@ -1,26 +1,38 @@
 <script setup>
-    import { reactive,defineProps,onMounted } from 'vue';
     import Card from './Card.vue';
-    import axios from 'axios';
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+    import { ref, onMounted } from 'vue';
+    import { db } from '../firebase';
+    import { ref as dbRef, get, child,} from 'firebase/database';
 
 
-    const state = reactive({
-        experiences: [],
-        isLoading:true,
-    })
+    let isLoading = ref(true) ;
+    const experiences = ref([]);
 
-    onMounted(async () => {
-        try{
-            const response = await axios.get(`/api/experiences`)
-            state.experiences = response.data;
-
-        }catch(error){
-            console.error('Error fetching experience',error)
-        }finally{
-            state.isLoading = false;
+    const fetchExperiences = async () => {
+    const dbReference = dbRef(db);
+    try {
+        console.log("Fetching data...");
+        const snapshot = await get(child(dbReference, 'experiences'));
+        console.log("Snapshot received:", snapshot);
+        if (snapshot.exists()) {
+        experiences.value = snapshot.val();
+        console.log("Data loaded:", experiences.value);
+        } else {
+        console.log("No data available");
         }
-    })
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    } finally {
+        isLoading.value = false;
+    }
+    };
+
+    onMounted(fetchExperiences);
+
+
+
+
 
     defineProps({
         limit: Number,
@@ -42,12 +54,12 @@
         </div>
 
         <!---Loading Part-->
-        <div v-if="state.isLoading" class="loading">
+        <div v-if="isLoading" class="loading">
             <PulseLoader/>
         </div>
 
         <div v-else class="area-card">
-        <div class="each-exp" v-for="experience in state.experiences.slice(0,limit || state.experiences.length)" :key="experience.id">
+        <div class="each-exp" v-for="experience in experiences.slice(0,limit || experiences.length)" :key="experience.id">
         <Card>
             <p v-if="experience.type=='intern'" class="intern">Intern</p>
             <p v-else-if="experience.type=='volunteer'" class="volunteer">Volunteer</p>

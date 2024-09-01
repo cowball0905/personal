@@ -6,9 +6,9 @@ import App from './App.vue'
 
 
 
-const app = createApp(App)
+const apps = createApp(App)
 
-app.use(router);
+apps.use(router);
 
-app.mount('#app')
+apps.mount('#app')
 
