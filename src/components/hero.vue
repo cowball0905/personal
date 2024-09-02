@@ -1,6 +1,6 @@
 <script setup>
   import face from '@/assets/DSCF5279.jpg';
-import { RouterLink } from 'vue-router';
+  import { RouterLink } from 'vue-router';
 
   const imageicon = face;
 </script>

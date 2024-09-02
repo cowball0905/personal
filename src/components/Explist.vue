@@ -53,7 +53,6 @@
         </RouterLink>
         </div>
 
-        <!---Loading Part-->
         <div v-if="isLoading" class="loading">
             <PulseLoader/>
         </div>
