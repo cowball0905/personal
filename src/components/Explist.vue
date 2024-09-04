@@ -1,36 +1,35 @@
 <script setup>
-    import Card from './Card.vue';
-    import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-    import { ref, onMounted } from 'vue';
-    import { db } from '../firebase';
-    import { ref as dbRef, get, child,} from 'firebase/database';
+import Card from './Card.vue';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import { ref, onMounted } from 'vue';
+import { db } from '../firebase';
+import { ref as dbRef, get, } from 'firebase/database';
 
 
-    let isLoading = ref(true) ;
-    const experiences = ref([]);
 
-    const fetchExperiences = async () => {
-    const dbReference = dbRef(db);
-    try {
-        console.log("Fetching data...");
-        const snapshot = await get(child(dbReference, 'experiences'));
-        console.log("Snapshot received:", snapshot);
-        if (snapshot.exists()) {
-        experiences.value = snapshot.val();
-        console.log("Data loaded:", experiences.value);
-        } else {
-        console.log("No data available");
-        }
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    } finally {
-        isLoading.value = false;
+let isLoading = ref(true);
+const experiences = ref([]);
+
+const fetchExperiences = async () => {
+  try {
+    console.log("Fetching data...");
+    const experiencesRef = dbRef(db, 'experiences');
+    const snapshot = await get(experiencesRef);
+    console.log("Snapshot received:", snapshot);
+    if (snapshot.exists()) {
+      experiences.value = snapshot.val();
+      console.log("Data loaded:", experiences.value);
+    } else {
+      console.log("No data available");
     }
-    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
-    onMounted(fetchExperiences);
-
-
+onMounted(fetchExperiences);
 
 
 
@@ -191,6 +190,9 @@
         .each-exp{
             width:90%;
         }
+        .readm{
+            width:40%;
+            }
         h1{
             font-size: 2em;
         }

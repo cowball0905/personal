@@ -5,16 +5,21 @@
     import { ref } from 'vue';
     import { db } from '../firebase';
     import { ref as dbRef, get, child,} from 'firebase/database';
+    import { useRoute } from 'vue-router';
 
 
     const isLoading = ref(true);
     const experiences = ref(null);
+    const route = useRoute();
+
+    const experienceid = route.params.id;
+
 
     const fetchExperience = async () => {
         const dbReference = dbRef(db);
         try {
             console.log("Fetching data...");
-            const snapshot = await get(child(dbReference, 'experiences'));
+            const snapshot = await get(child(dbReference, `experiences/${experienceid-1}`));
             console.log("Snapshot received:", snapshot);
             if (snapshot.exists()) {
                 const data = snapshot.val();

@@ -7,14 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "json-server --watch src/Experience.json --port 5000",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@tato30/vue-pdf": "^1.11.0",
+    "axios": "^1.7.7",
     "firebase": "^10.13.1",
     "json": "^11.0.0",
-    "json-server": "^1.0.0-beta.2",
     "pdf-vue3": "^1.0.12",
     "pdfjs-dist": "^4.5.136",
     "server": "^1.0.39",
