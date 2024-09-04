@@ -3,10 +3,28 @@
     import {onMounted} from 'vue';
     import BackButton from '@/components/BackButton.vue';
     import { ref } from 'vue';
-    import { db } from '../firebase';
     import { ref as dbRef, get, child,} from 'firebase/database';
     import { useRoute } from 'vue-router';
+    import { initializeApp } from "firebase/app";
+    import { getDatabase } from "firebase/database";
 
+
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAgBmfWRbE_fNzx-gaGAPAuytRdRmEXR8A",
+        authDomain: "personal-use-1857a.firebaseapp.com",
+        projectId: "personal-use-1857a",
+        storageBucket: "personal-use-1857a.appspot.com",
+        messagingSenderId: "123791548487",
+        databaseURL: "https://personal-use-1857a-default-rtdb.asia-southeast1.firebasedatabase.app",
+        appId: "1:123791548487:web:c099989d47700c36981162",
+        measurementId: "G-ZLTH39PEQ1"
+    };
+
+        // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
     const isLoading = ref(true);
     const experiences = ref(null);
