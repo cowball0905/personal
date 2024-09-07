@@ -1,62 +1,36 @@
 <script setup>
-import Card from './Card.vue';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import { ref, onMounted } from 'vue';
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref as dbRef, get } from "firebase/database";
-
-
-// Your Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAgBmfWRbE_fNzx-gaGAPAuytRdRmEXR8A",
-  authDomain: "personal-use-1857a.firebaseapp.com",
-  projectId: "personal-use-1857a",
-  storageBucket: "personal-use-1857a.appspot.com",
-  messagingSenderId: "123791548487",
-  databaseURL: "https://personal-use-1857a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  appId: "1:123791548487:web:c099989d47700c36981162",
-  measurementId: "G-ZLTH39PEQ1"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+import axios from 'axios';
+import Card from './Card.vue';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 let isLoading = ref(true);
 const experiences = ref([]);
 
 const fetchExperiences = async () => {
-  try {
-    console.log("Fetching data...");
-    const experiencesRef = dbRef(db, 'experiences');
-    const snapshot = await get(experiencesRef);
-    console.log("Snapshot received:", snapshot);
-    if (snapshot.exists()) {
-      experiences.value = snapshot.val();
-      console.log("Data loaded:", experiences.value);
-    } else {
-      console.log("No data available");
+    try {
+        console.log("Fetching data...");
+        const response = await axios.get('https://my-json-server.typicode.com/cowball0905/json-server/db');
+        console.log("Data received:", response.data);
+        experiences.value = response.data.experiences || [];
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        experiences.value = []; 
+    } finally {
+        isLoading.value = false;
     }
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  } finally {
-    isLoading.value = false;
-  }
 };
 
 onMounted(fetchExperiences);
 
-
-
-    defineProps({
-        limit: Number,
-        showButton:{
-            type:Boolean,
-            default:false
-        },
-    })
+defineProps({
+    limit: Number,
+    showButton: {
+        type: Boolean,
+        default: false
+    },
+});
 </script>
-
 
 <template>
     <div class="Area">

@@ -3,51 +3,28 @@
     import {onMounted} from 'vue';
     import BackButton from '@/components/BackButton.vue';
     import { ref } from 'vue';
-    import { ref as dbRef, get, child,} from 'firebase/database';
     import { useRoute } from 'vue-router';
-    import { initializeApp } from "firebase/app";
-    import { getDatabase } from "firebase/database";
+    import axios from 'axios';
 
 
 
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyAgBmfWRbE_fNzx-gaGAPAuytRdRmEXR8A",
-        authDomain: "personal-use-1857a.firebaseapp.com",
-        projectId: "personal-use-1857a",
-        storageBucket: "personal-use-1857a.appspot.com",
-        messagingSenderId: "123791548487",
-        databaseURL: "https://personal-use-1857a-default-rtdb.asia-southeast1.firebasedatabase.app",
-        appId: "1:123791548487:web:c099989d47700c36981162",
-        measurementId: "G-ZLTH39PEQ1"
-    };
-
-        // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
 
     const isLoading = ref(true);
-    const experiences = ref(null);
+    const experiences = ref({});
     const route = useRoute();
 
     const experienceid = route.params.id;
 
 
     const fetchExperience = async () => {
-        const dbReference = dbRef(db);
         try {
             console.log("Fetching data...");
-            const snapshot = await get(child(dbReference, `experiences/${experienceid-1}`));
-            console.log("Snapshot received:", snapshot);
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                experiences.value = Array.isArray(data) ? data[0] : data;
-                console.log("Data loaded:", experiences.value);
-            } else {
-                console.log("No data available");
-            }
+            const response = await axios.get(`https://my-json-server.typicode.com/cowball0905/json-server/experiences/${experienceid}`);
+            console.log("Data received:", response.data);
+            experiences.value = response.data || {}; 
         } catch (error) {
             console.error("Error fetching data:", error);
+            experiences.value = {};  
         } finally {
             isLoading.value = false;
         }
