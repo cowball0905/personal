@@ -59,6 +59,11 @@ defineProps({
 
         </Card>
         </div>
+        <div class="viewmore-container" v-if="showButton">
+        <RouterLink to="/experience" class="viewmore1">
+            View More
+        </RouterLink>
+        </div>
         </div>
 
     </div>
@@ -67,6 +72,27 @@ defineProps({
 </template>
   
   <style scoped>
+    .viewmore-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .viewmore1 {
+        background-color: black;
+        border-radius: 2em;
+        color: white;
+        text-align: center;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        display: none;
+        width: 80%;
+    }
+
+    .viewmore1:hover {
+    background-color: #333;
+    }
     .viewmore:hover{
         background-color: gray;
     }
@@ -169,6 +195,7 @@ defineProps({
         width:30%;
         cursor: pointer; 
     }
+
     .header-container {
         display: flex;
         align-items: center;
@@ -180,7 +207,7 @@ defineProps({
             width:90%;
         }
         .readm{
-            width:40%;
+            width:100%;
             }
         h1{
             font-size: 2em;
@@ -213,9 +240,13 @@ defineProps({
             width: 100%; 
             margin-top: 1rem; 
             order:2;
+            display: none;
         }
         .area-card{
             justify-content: center;
+        }
+        .viewmore1{
+            display: block;
         }
     }
   </style>

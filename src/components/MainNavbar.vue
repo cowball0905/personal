@@ -1,43 +1,41 @@
-<script>
-export default {
-  methods: {
-    toggle() {
-      let navItems = document.querySelector(".Navbar2");
-      if (navItems.style.display === "none") {
-        navItems.style.display = "flex";
-      } else {
-        navItems.style.display = "none";
-      }
-    }
-  }
+<script setup>
+import { ref } from 'vue';
+
+const isNavbarVisible = ref(false);
+
+function toggle() {
+  isNavbarVisible.value = !isNavbarVisible.value;
 }
 </script>
 <template>
   <div class="Navbar">
-      <RouterLink to="/">
-        <span class='icon'>< WHL /></span>
-      </RouterLink>
-      <ul class="navitems">
-        <li class="nav1"><RouterLink to="/">Home</RouterLink></li>
-        <li class="nav1"><RouterLink to="/experience">Experience</RouterLink></li>
-        <li class="nav1"><RouterLink to="/cv">CV</RouterLink></li>
-      </ul>
-      <div @click="toggle" class="menu-container">
-        <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-          <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
-        </svg>
-      </div>
+    <RouterLink to="/">
+      <span class='icon'>< WHL /></span>
+    </RouterLink>
+    <ul class="navitems">
+      <li class="nav1"><RouterLink to="/">Home</RouterLink></li>
+      <li class="nav1"><RouterLink to="/experience">Experience</RouterLink></li>
+      <li class="nav1"><RouterLink to="/cv">CV</RouterLink></li>
+    </ul>
+    <div @click="toggle" class="menu-container">
+      <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+      </svg>
+    </div>
   </div>
-  <div class="Navbar2">
-      <ul class="navitems1">
-        <li class="home1"><RouterLink to="/">Home</RouterLink></li>
-        <li class="exp1"><RouterLink to="/experience">Experience</RouterLink></li>
-        <li class="cv1"><RouterLink to="/cv">CV</RouterLink></li>
-      </ul>
+  <div class="Navbar2" :style="{ display: isNavbarVisible ? 'block' : 'none' }">
+    <ul class="navitems1">
+      <li class="home1"><RouterLink to="/" @click="toggle">Home</RouterLink></li>
+      <li class="exp1"><RouterLink to="/experience" @click="toggle">Experience</RouterLink></li>
+      <li class="cv1"><RouterLink to="/cv" @click="toggle">CV</RouterLink></li>
+    </ul>
   </div>
 </template>
 
 <style scoped>
+  .Navbar2 {
+    transition: display 0.3s ease-in-out;
+  }
   .home1,.cv1,.exp1{
     width:100%;
     padding: 2em 0;
