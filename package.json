@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tato30/vue-pdf": "^1.11.0",
     "axios": "^1.7.7",
+    "bootstrap-vue": "^2.23.1",
     "firebase": "^10.13.1",
     "json": "^11.0.0",
     "pdf-vue3": "^1.0.12",
@@ -21,13 +23,15 @@
     "vue-pdf": "^1.0.0",
     "vue-route": "^1.5.1",
     "vue-router": "^4.4.3",
-    "vue-spinner": "^1.0.4"
+    "vue-spinner": "^1.0.4",
+    "vue3-highlightjs": "^1.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
     "vite": "^5.2.8",
