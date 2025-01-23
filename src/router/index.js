@@ -1,4 +1,4 @@
-import { createRouter,createWebHistory } from "vue-router";
+import { createRouter,createWebHashHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import Experience from "@/views/Experience.vue";
 import Notfound from "@/views/Notfound.vue";
@@ -6,7 +6,7 @@ import Expview from "@/views/Expview.vue";
 import CV from "@/views/cv.vue";
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHashHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',

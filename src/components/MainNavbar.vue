@@ -1,39 +1,49 @@
 <script>
 export default {
+  data() {
+    return {
+      isMenuOpen: false
+    }
+  },
   methods: {
     toggle() {
+      this.isMenuOpen = !this.isMenuOpen;
       let navItems = document.querySelector(".Navbar2");
-      if (navItems.style.display === "none") {
-        navItems.style.display = "flex";
-      } else {
+      navItems.style.display = this.isMenuOpen ? "flex" : "none";
+    },
+    handleNavClick() {
+      if (window.innerWidth <= 768) {
+        this.isMenuOpen = false;
+        let navItems = document.querySelector(".Navbar2");
         navItems.style.display = "none";
       }
     }
   }
 }
 </script>
+
 <template>
   <div class="Navbar">
-      <RouterLink to="/">
-        <span class='icon'>< WHL /></span>
-      </RouterLink>
-      <ul class="navitems">
-        <li class="nav1"><RouterLink to="/">Home</RouterLink></li>
-        <li class="nav1"><RouterLink to="/experience">Experience</RouterLink></li>
-        <li class="nav1"><RouterLink to="/cv">CV</RouterLink></li>
-      </ul>
-      <div @click="toggle" class="menu-container">
-        <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-          <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
-        </svg>
-      </div>
+    <RouterLink to="/">
+      <span class='icon'>< WHL /></span>
+    </RouterLink>
+    <ul class="navitems">
+      <li class="nav1"><RouterLink to="/">Home</RouterLink></li>
+      <li class="nav1"><RouterLink to="/experience">Experience</RouterLink></li>
+      <li class="nav1"><RouterLink to="/cv">Resume</RouterLink></li>
+    </ul>
+    <div @click="toggle" class="menu-container">
+      <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+      </svg>
+    </div>
   </div>
   <div class="Navbar2">
-      <ul class="navitems1">
-        <li class="home1"><RouterLink to="/">Home</RouterLink></li>
-        <li class="exp1"><RouterLink to="/experience">Experience</RouterLink></li>
-        <li class="cv1"><RouterLink to="/cv">CV</RouterLink></li>
-      </ul>
+    <ul class="navitems1">
+      <li class="home1" @click="handleNavClick"><RouterLink to="/">Home</RouterLink></li>
+      <li class="exp1" @click="handleNavClick"><RouterLink to="/experience">Experience</RouterLink></li>
+      <li class="cv1" @click="handleNavClick"><RouterLink to="/cv">Resume</RouterLink></li>
+    </ul>
   </div>
 </template>
 

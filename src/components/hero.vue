@@ -1,27 +1,76 @@
 <script setup>
-  import face from '@/assets/DSCF5279.jpg';
-  import { RouterLink } from 'vue-router';
+import face from '@/assets/DSCF5279.jpg';
 
-  const imageicon = face;
+const imageicon = face;
+
+const scrollToFooter = () => {
+  document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+}
 </script>
+
 <template>
   <div class="Hero">
     <div class="icon-part">
       <img :src='imageicon' alt="my face">
     </div>
     <div class="hero-text">
-      <h1>Hello, I'm Ken Wong</h1><br>
-      <h3>an ordinary <span>Computer Science</span> student with enthusiasm</h3>
-      <div class="buttonmain">
-        <RouterLink to="/cv" class="contactb">Contact Me</RouterLink>
-        <button class="linkinb"><a href='https://www.linkedin.com/in/ken-wong-1a86a5294/'>LinkedIn</a></button>
-      </div>
+      <code>
+        <div class="typing-container">
+          <p class="TitleEffect">
+            Hello I am Ken Wong
+          </p>
+        </div>
+      </code>
+      <code>
+        <div class="typing-container">
+          <p class="typingEffect">
+            a <span>Computer Science</span> student with passion.
+          </p>
+        </div>
+      </code>
     </div>
   </div>
 </template>
 
-
 <style scoped>
+  .typing-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .typingEffect {
+    width: 0;
+    overflow: hidden; 
+    font-size: 16px;
+    white-space: nowrap; 
+    animation: typing 2s steps(30) forwards 2.5s;
+    margin: 0 auto;
+  }
+
+  .TitleEffect {
+    width: 0;
+    overflow: hidden; 
+    font-size: 30px;
+    white-space: nowrap; 
+    animation: typing 2s steps(30) forwards;
+    margin: 0 auto;
+  }
+
+  code {
+    height: 70px;
+    color: black;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% } 
+  }
   .contactb:hover{
     background-color: black;
     color:white;
@@ -73,8 +122,9 @@
     width: 100%; 
     display: flex;
     flex-direction: row;
+    margin-top: 1%;
     justify-content: space-between;
-    padding: 5% 0%;
+    padding:0%;
   }
   .icon-part{
     justify-content: center;
@@ -87,6 +137,20 @@
   }
 
   @media (max-width: 768px) {
+    .typingEffect {
+        width: 0;
+        overflow: hidden; 
+        font-size: 10px;
+        white-space: nowrap; 
+        animation: typing 2s steps(30) forwards 2.5s;
+    }
+    .TitleEffect {
+        width: 0;
+        overflow: hidden; 
+        font-size: 20px;
+        white-space: nowrap; 
+        animation: typing 2s steps(30) forwards;
+    }
     .Hero {
       flex-direction: column;
       text-align: center;
@@ -107,6 +171,9 @@
     .contactb, .linkinb {
       width: 80%; 
       margin-top: 10px; 
+    }
+    .name{
+      font-size: 25px;
     }
   }
 </style>

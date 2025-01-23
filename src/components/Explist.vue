@@ -2,7 +2,9 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Card from './Card.vue';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import Tag from 'primevue/tag';
+import ProgressSpinner from 'primevue/progressspinner';
+
 
 let isLoading = ref(true);
 const experiences = ref([]);
@@ -13,7 +15,7 @@ const fetchExperiences = async () => {
         console.log(response.data);
         experiences.value = response.data.experiences || [];
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(error);
         experiences.value = []; 
     } finally {
         isLoading.value = false;
@@ -28,23 +30,71 @@ defineProps({
         type: Boolean,
         default: false
     },
+    showIntro:{
+        type: Boolean,
+        default: true
+    }
 });
+
 </script>
 
 <template>
-    <div class="Area">
-        <div class="header-container">
+    <div className="min-h-[800px] p-[5%] bg-[hsla(120,100%,50%,0.05)]">
+        <div v-if="showIntro" className="min-h-[300px] flex flex-col items-center md:text-left text-center my-4">
+            <h1 className="text-4xl text-black">Let me introduce myself</h1>
+                <div className="p-[5%] flex flex-row justify-center">
+                    <div className="text-gray-600 md:text-xl space-y-8 md:w-[60%] md:text-left text-center text-lg w-full">
+                    <p>Hello I am Ken Wong from CityU!</p>
+                    <p>I am passionate in programming and I have learnt different aspect of skills such as <span className="text-green-600">Basic Python,C++,JAVA and React.js/Vue.js</span>.</p>
+                    <p>My field of interest are developing new Website. Also, I crave the opportunity to learn skills of <span className="text-green-600">business analysis and CyberSecurity</span>.</p>
+                </div>
+                <div className="w-[40%] justify-center md:flex hidden items-center">
+                    <img src="../assets/pc-icon.png" className="w-[50%] hidden md:flex">
+                </div>
+            </div>
+
+        </div>
+
+        <div v-if="showIntro" className="min-h-[300px] flex flex-col md:text-left">
+            <h1 className="text-4xl text-black">Skills</h1>
+            <div className="flex flex-col p-[3%]">
+                <div className="flex gap-2 my-2 flex-wrap">
+                    <Tag severity="info" value="C++" rounded ></Tag>
+                    <Tag severity="info" value="Python" rounded ></Tag>
+                    <Tag severity="info" value="Java" rounded ></Tag>
+                    <Tag severity="info" value="React.js" rounded ></Tag>
+                    <Tag severity="info" value="Vue.js" rounded ></Tag>
+                    <Tag severity="info" value="HTML/CSS/JavaScript" rounded ></Tag>
+                    <Tag severity="info" value="Tailwind CSS" rounded ></Tag>
+                    <Tag severity="info" value="Google Analytics Tools" rounded ></Tag>
+                    <Tag severity="info" value="Cloudflare" rounded ></Tag>
+                </div>
+                <div className="flex gap-2 my-2 flex-wrap">
+                    <Tag severity="warn" value="Teamwork & Collaboration" rounded ></Tag>
+                    <Tag severity="warn" value="Fast Learner" rounded ></Tag>
+                    <Tag severity="warn" value="Problem-Solving Aptitude" rounded ></Tag>
+                    <Tag severity="warn" value="Time Management & Organization" rounded ></Tag>
+                </div>
+                <div className="flex gap-2 my-2 flex-wrap">
+                    <Tag severity="secondary" value="Adobe PhotoShop" rounded ></Tag>
+                    <Tag severity="secondary" value="Adobe Premiere Pro" rounded ></Tag>
+                </div>      
+            </div>
+        </div>
+
+
+
+        <div className="flex md:items-center md:justify-between md:width-full flex-col items-start md:flex-row ">
             <h1>My Experience</h1>
-        <RouterLink to="/experience" v-if="showButton" class="viewmore">
-                View More
-        </RouterLink>
+            <RouterLink to="/experience" v-if="showButton" class="viewmore">
+                    View More
+            </RouterLink>
+        </div>
+        <div v-if="isLoading" className="flex justify-center items-center h-[200px] w-full">
+            <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="transparent" animationDuration=".5s" aria-label="Custom ProgressSpinner" />
         </div>
 
-        <div v-if="isLoading" class="loading">
-            <PulseLoader/>
-        </div>
-
-        <div v-else class="area-card">
+        <div v-else className="area-card">
         <div class="each-exp" v-for="experience in experiences.slice(0,limit || experiences.length)" :key="experience.id">
         <Card>
             <p v-if="experience.type=='intern'" class="intern">Intern</p>
@@ -61,6 +111,12 @@ defineProps({
         <RouterLink to="/experience" v-if="showButton" class="viewmore1">
                 View More
         </RouterLink>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
         </div>
     </div>
 
@@ -68,6 +124,69 @@ defineProps({
 </template>
   
   <style scoped>
+    .cube {
+        position: absolute;
+        top: 80vh;
+        left: 45vw;
+        width: 10px;
+        height: 10px;
+        transform-origin: top left;
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        animation: cube 6s ease-in forwards infinite;
+        z-index: -1;
+        background-color: #6f8ac084;
+        border-radius: 1px;
+    }
+
+
+    .cube:nth-child(2) {
+        animation-delay: 2s;
+        right: 3vw;    
+        top: 40vh;
+    }
+
+    .cube:nth-child(3) {
+        animation-delay: 4s;
+        left: 75vw;
+        top: 50vh;
+    }
+
+    .cube:nth-child(4) {
+        animation-delay: 1s;
+        left: 90vw;
+        top: 10vh;
+    }
+
+    .cube:nth-child(5) {
+        animation-delay: 3s;
+        left: 10vw;
+        top: 85vh;
+    }
+
+
+    .cube:nth-child(10) {
+        animation-delay: 2s;  
+        left: 90vw;
+        top: 30vh;
+    }
+
+    .cube:nth-child(11) {
+        animation-delay: 1.5s;  
+        right: 0vw;
+        bottom: 30vh;
+    }
+
+    @keyframes cube {
+        from {
+            transform: scale(0) rotate(0deg) translate(-50%, -50%);   
+            opacity: 0.3;
+        }
+        to {
+            transform: scale(20) rotate(960deg) translate(-50%, 0%); 
+            opacity: 0;
+        }
+    }
+
     .viewmore:hover{
         background-color: gray;
     }
@@ -107,10 +226,6 @@ defineProps({
     }
     h1{
         font-size: 3em;
-    }
-    .Area{
-        background-color: hsla(120, 100%, 50%, 0.05);
-        padding:5%;
     }
     .each-exp {
         margin-bottom: 3rem;
@@ -179,7 +294,7 @@ defineProps({
     .viewmore1{
         display: none;
     }
-    @media (max-width:768px) {
+    @media (max-width:1200px) {
         .each-exp{
             width:90%;
         }
@@ -209,10 +324,7 @@ defineProps({
             margin:0% 0% 3% 0%;
             font-size: small ;
         }
-        .header-container {
-        flex-direction: column; 
-        align-items: flex-start; 
-        }
+
         .viewmore {
             width: 100%; 
             margin-top: 1rem; 

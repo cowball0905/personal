@@ -6,9 +6,6 @@
     import { useRoute } from 'vue-router';
     import axios from 'axios';
 
-
-
-
     const isLoading = ref(true);
     const experiences = ref({});
     const route = useRoute();
@@ -18,12 +15,11 @@
 
     const fetchExperience = async () => {
         try {
-            console.log("Fetching data...");
             const response = await axios.get(`https://my-json-server.typicode.com/cowball0905/json-server/experiences/${experienceid}`);
-            console.log("Data received:", response.data);
+            console.log(response.data);
             experiences.value = response.data || {}; 
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error(error);
             experiences.value = {};  
         } finally {
             isLoading.value = false;
@@ -34,9 +30,9 @@
 </script>
 
 <template>
-        <div v-if="isLoading" class="loading">
+        <div v-if="isLoading" class="exp-area2">
             <BackButton/>
-            <PulseLoader/>
+            <PulseLoader class="loadback"/>
         </div>
 
         <div v-else class="exp-area">
@@ -62,6 +58,12 @@
                     <a :href="experiences.web" v-if="experiences.web">{{experiences.web}}</a>
                     <p v-else>-</p>
                 </div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
             </div>
 
 
@@ -71,8 +73,82 @@
 
 
 <style scoped>
+    .cube {
+        position: absolute;
+        top: 80vh;
+        left: 45vw;
+        width: 10px;
+        height: 10px;
+        transform-origin: top left;
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        animation: cube 6s ease-in forwards infinite;
+        z-index: -1;
+        background-color: #6f8ac084;
+        border-radius: 1px;
+    }
+
+
+    .cube:nth-child(2) {
+        animation-delay: 2s;
+        right: 3vw;    
+        top: 40vh;
+    }
+
+    .cube:nth-child(3) {
+        animation-delay: 4s;
+        left: 75vw;
+        top: 50vh;
+    }
+
+    .cube:nth-child(4) {
+        animation-delay: 1s;
+        left: 90vw;
+        top: 10vh;
+    }
+
+    .cube:nth-child(5) {
+        animation-delay: 3s;
+        left: 10vw;
+        top: 85vh;
+    }
+
+
+    .cube:nth-child(10) {
+        animation-delay: 2s;  
+        left: 90vw;
+        top: 30vh;
+    }
+
+    .cube:nth-child(11) {
+        animation-delay: 1.5s;  
+        right: 0vw;
+        bottom: 30vh;
+    }
+
+    @keyframes cube {
+        from {
+            transform: scale(0) rotate(0deg) translate(-50%, -50%);   
+            opacity: 0.3;
+        }
+        to {
+            transform: scale(20) rotate(960deg) translate(-50%, 0%); 
+            opacity: 0;
+        }
+    }
+    .loadback{
+        align-self:center;
+    }
     .exp-area{
-        background-color: hsla(120, 100%, 50%, 0.05);;
+        background-color: hsla(120, 100%, 50%, 0.05);
+        min-height: 800px;
+    }
+    .exp-area2{
+        background-color: hsla(120, 100%, 50%, 0.05);
+        min-height: 800px;
+        padding: 3%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
     }
     .desc {
         margin-bottom: 2rem;
@@ -170,6 +246,14 @@
 
         h1 {
             font-size: 1.2em;
+        }
+        .exp-area2{
+            background-color: hsla(120, 100%, 50%, 0.05);
+            min-height: 800px;
+            padding: 3%;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
         }
     }
 

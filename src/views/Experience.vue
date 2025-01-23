@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <Explist/>
+    <Explist :showIntro="false"/>
 </template>

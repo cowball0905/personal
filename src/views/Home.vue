@@ -1,8 +1,6 @@
 <script setup>
   import hero from '../components/hero.vue'
   import Explist from '../components/Explist.vue';
-
-
 </script>
 
 
