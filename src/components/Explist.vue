@@ -5,7 +5,6 @@ import Card from './Card.vue';
 import Tag from 'primevue/tag';
 import ProgressSpinner from 'primevue/progressspinner';
 
-
 let isLoading = ref(true);
 const experiences = ref([]);
 
@@ -40,6 +39,7 @@ defineProps({
 
 <template>
     <div className="min-h-[800px] p-[5%] bg-[hsla(120,100%,50%,0.05)]">
+        
         <div v-if="showIntro" className="min-h-[300px] flex flex-col items-center md:text-left text-center my-4">
             <h1 className="text-4xl text-black">Let me introduce myself</h1>
                 <div className="p-[5%] flex flex-row justify-center">
@@ -84,7 +84,7 @@ defineProps({
 
 
 
-        <div className="flex md:items-center md:justify-between md:width-full flex-col items-start md:flex-row ">
+        <div className=" flex md:items-center md:justify-between md:width-full flex-col items-start md:flex-row ">
             <h1>My Experience</h1>
             <RouterLink to="/experience" v-if="showButton" class="viewmore">
                     View More

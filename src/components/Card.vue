@@ -1,18 +1,8 @@
 <template>
-  <div className="card">
+  <div className="bg-[rgb(255,251,246)] flex flex-col h-full w-full p-8 shadow-lg rounded-2xl">
     <slot></slot>
   </div>
 </template>
 
 <style scoped>
-.card {
-  background-color: rgb(255, 251, 246);
-  border-radius: 2rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  width: 100%; 
-  min-height: 100%;
-}
 </style>

@@ -6,10 +6,6 @@
           <p>Email</p>
           <p>skpsleong@gmail.com</p>
         </div>
-        <div className="mt-8">
-          <p>Telephone</p>
-          <p>(+852) 69085657</p>
-        </div>
 
         <div className="pr-4 py-8 h-[30px] flex flex-row w-[100%] gap-10">
           <a href="https://github.com/cowball0905?tab=repositories"><img className="w-8 h-8" src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/></a>

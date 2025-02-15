@@ -17,7 +17,15 @@ export default {
         let navItems = document.querySelector(".Navbar2");
         navItems.style.display = "none";
       }
-    }
+    },
+    scrollToFooter(){
+      document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+      if (window.innerWidth <= 768) {
+        this.isMenuOpen = false;
+        let navItems = document.querySelector(".Navbar2");
+        navItems.style.display = "none";
+      }
+    } 
   }
 }
 </script>
@@ -31,6 +39,7 @@ export default {
       <li class="nav1"><RouterLink to="/">Home</RouterLink></li>
       <li class="nav1"><RouterLink to="/experience">Experience</RouterLink></li>
       <li class="nav1"><RouterLink to="/cv">Resume</RouterLink></li>
+      <li class="nav1" @click="scrollToFooter">Contact</li>
     </ul>
     <div @click="toggle" class="menu-container">
       <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -39,28 +48,18 @@ export default {
     </div>
   </div>
   <div class="Navbar2">
-    <ul class="navitems1">
-      <li class="home1" @click="handleNavClick"><RouterLink to="/">Home</RouterLink></li>
-      <li class="exp1" @click="handleNavClick"><RouterLink to="/experience">Experience</RouterLink></li>
-      <li class="cv1" @click="handleNavClick"><RouterLink to="/cv">Resume</RouterLink></li>
+    <ul className="flex flex-col text-center justify-center">
+      <li className="w-full py-8 bg-white" @click="handleNavClick"><RouterLink to="/">Home</RouterLink></li>
+      <li className="w-full py-8 bg-white" @click="handleNavClick"><RouterLink to="/experience">Experience</RouterLink></li>
+      <li className="w-full py-8 bg-white" @click="handleNavClick"><RouterLink to="/cv">Resume</RouterLink></li>
+      <li className="w-full py-8 bg-white cursor-pointer" @click="scrollToFooter">Contact</li>
     </ul>
   </div>
 </template>
 
 <style scoped>
-  .home1,.cv1,.exp1{
-    width:100%;
-    padding: 2em 0;
-    background-color: white;
-  }
   .menu{
     display: none;
-  }
-  .navitems1{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
   }
   .Navbar2{
     position: absolute;

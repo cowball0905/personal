@@ -3,9 +3,6 @@ import face from '@/assets/DSCF5279.jpg';
 
 const imageicon = face;
 
-const scrollToFooter = () => {
-  document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
-}
 </script>
 
 <template>
