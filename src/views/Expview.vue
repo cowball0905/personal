@@ -1,5 +1,5 @@
 <script setup>
-    import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+    import ProgressSpinner from 'primevue/progressspinner';
     import {onMounted} from 'vue';
     import BackButton from '@/components/BackButton.vue';
     import { ref } from 'vue';
@@ -17,7 +17,7 @@
         try {
             const response = await axios.get(`https://my-json-server.typicode.com/cowball0905/json-server/experiences/${experienceid}`);
             console.log(response.data);
-            experiences.value = response.data || {}; 
+            experiences.value = response.data; 
         } catch (error) {
             console.error(error);
             experiences.value = {};  
@@ -32,7 +32,9 @@
 <template>
         <div v-if="isLoading" class="exp-area2">
             <BackButton/>
-            <PulseLoader class="loadback"/>
+            <div className="flex justify-center items-center h-[200px] w-full">
+                <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="transparent" animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+            </div>
         </div>
 
         <div v-else class="exp-area">

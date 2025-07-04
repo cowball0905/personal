@@ -12,7 +12,7 @@ const fetchExperiences = async () => {
     try {
         const response = await axios.get('https://my-json-server.typicode.com/cowball0905/json-server/db');
         console.log(response.data);
-        experiences.value = response.data.experiences || [];
+        experiences.value = response.data.experiences;
     } catch (error) {
         console.error(error);
         experiences.value = []; 
@@ -45,8 +45,8 @@ defineProps({
                 <div className="p-[5%] flex flex-row justify-center">
                     <div className="text-gray-600 md:text-xl space-y-8 md:w-[60%] md:text-left text-center text-lg w-full">
                     <p>Hello I am Ken Wong from CityU!</p>
-                    <p>I am passionate in programming and I have learnt different aspect of skills such as <span className="text-green-600">Basic Python,C++,JAVA and React.js/Vue.js</span>.</p>
-                    <p>My field of interest are developing new Website. Also, I crave the opportunity to learn skills of <span className="text-green-600">business analysis and CyberSecurity</span>.</p>
+                    <p>I am passionate in Computer Science and I have learnt different aspects of skills such as <span className="text-green-600">Basic Python,C++,JAVA and React.js/Vue.js</span>.</p>
+                    <p>My field of interest are developing new Websites. Also, I crave the opportunity to learn different areas of IT skills.</p>
                 </div>
                 <div className="w-[40%] justify-center md:flex hidden items-center">
                     <img src="../assets/pc-icon.png" className="w-[50%] hidden md:flex">
